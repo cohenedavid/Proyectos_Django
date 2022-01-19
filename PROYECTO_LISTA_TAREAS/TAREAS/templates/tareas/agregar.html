@@ -1,0 +1,18 @@
+{% extends 'tareas/layout.html' %}
+
+{% block body %}
+
+    <h1>Agregar tarea</h1>
+    <form action="{% url 'tareas:agregar' %}" method="POST">
+        {% csrf_token %} <!-- Token para para bloquear intentos de envio de forms ajenos a la pagina-->
+        <!-- <input type="text" name="tarea"> --> 
+        {{form}}
+        <input type="submit">
+    </form>
+    <a href="{% url 'tareas:index' %}">Ver tareas</a>
+    
+    <div class="spinner">
+        
+    </div>
+
+{% endblock body %}
