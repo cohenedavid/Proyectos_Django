@@ -1,0 +1,33 @@
+{% extends 'vuelos/layout.html' %}
+
+{% block body %}
+
+    <h1>Vuelo {{vuelo.id}}</h1>
+    <ul>
+        <li>Origen: {{vuelo.origen}}</li>
+        <li>Destino: {{vuelo.destino}}</li>
+        <li>Duración: {{vuelo.duracion}} horas</li>
+    </ul>
+
+    <h2>Pasajeros:</h2>
+    <ul>
+        {% for unPasajero in pasajeros %}
+            <li>{{ unPasajero }}</li>
+        {% empty %}
+            <li>Aún no hay pasajeros.</li>
+        {% endfor %}
+    </ul>
+    
+    <form action="{% url 'vuelos:reserva' vuelo.id %}" method="POST">
+        {% csrf_token %}
+        <select name="pasajero" id="">
+            {% for unPasajero in noPasajeros %}
+                <option value=" {{unPasajero.id}} ">{{unPasajero.nombre}} {{unPasajero.apellido}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Reservar">
+    </form>
+
+    <a href="{% url 'vuelos:index' %}">Todos los vuelos</a>
+
+{% endblock body %}
